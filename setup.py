@@ -27,9 +27,7 @@ setup(name='transmogrify.sqlalchemy',
           "SQLAlchemy >=0.4,<0.5dev",
 #         "zope.interface",
       ],
-      test_rquires=[
-          "pysqlite",
-      ],
+      test_suite='nose.collector',
       entry_points="""
           [transmogrity.blueprint]
           sqlalchemy = transmogrify.sqlalchemy:SQLSourceSection
