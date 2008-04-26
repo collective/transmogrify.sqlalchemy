@@ -8,7 +8,6 @@ setup(name='transmogrify.sqlalchemy',
       description="Feed data from SQLAlchemy into a transmogrifier pipeline",
       long_description=open("README.txt").read() + "\n" +
                        open(os.path.join("docs", "HISTORY.txt")).read(),
-      # Get more strings from http://www.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
         "Programming Language :: Python",
         "Topic :: Software Development :: Libraries :: Python Modules",
@@ -27,6 +26,9 @@ setup(name='transmogrify.sqlalchemy',
           "collective.transmogrifier",
           "SQLAlchemy >=0.4,<0.5dev",
 #         "zope.interface",
+      ],
+      test_rquires=[
+          "pysqlite",
       ],
       entry_points="""
           [transmogrity.blueprint]
