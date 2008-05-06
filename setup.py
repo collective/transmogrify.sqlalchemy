@@ -29,7 +29,5 @@ setup(name='transmogrify.sqlalchemy',
       ],
       test_suite='nose.collector',
       entry_points="""
-          [transmogrity.blueprint]
-          sqlalchemy = transmogrify.sqlalchemy:SQLSourceSection
       """,
       )
