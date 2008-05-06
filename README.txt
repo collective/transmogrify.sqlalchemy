@@ -18,7 +18,7 @@ A transmogrify.sqlalchemy blueprint only takes two parameters:
 
 dsn
    Connection information for the SQL database. The exact format is documented
-   in the SQLAlchemy documentation for `_create_engine() arguments`_.
+   in the SQLAlchemy documentation for `create_engine() arguments`_.
   
 query
    The SQL query that will be executed. 
@@ -35,6 +35,6 @@ database into the pipeline::
     query=SELECT * FROM menu
 
 .. _create_engine() arguments: http://www.sqlalchemy.org/docs/04/dbengine.html#dbengine_establishing
-.. _collective.transmogrifier: https://pypi.python.org/pypi/_collective.transmogrifier
+.. _collective.transmogrifier: https://pypi.python.org/pypi/collective.transmogrifier
 
 
