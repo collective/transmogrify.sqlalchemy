@@ -24,11 +24,11 @@ class SQLSourceSection(object):
             
         if self.dsn in self.conns:
             self.connection = conns[self.dsn]
-            self.close = True
+            self.close = False
         else:
             engine = sqlalchemy.create_engine(self.dsn)
             self.conns[self.dsn] = self.connection = engine.connect()
-            self.close = False
+            self.close = True
 
     def __iter__(self):
         for item in self.previous:
