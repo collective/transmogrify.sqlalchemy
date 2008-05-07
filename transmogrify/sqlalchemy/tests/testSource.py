@@ -5,12 +5,14 @@ from unittest import makeSuite
 from transmogrify.sqlalchemy import SQLSourceSection
 from transmogrify.sqlalchemy.tests.utils import LoadSampleData
 
+class MockTransmogrifier(object):
+    pass
 
 class SQLSourceSectionTests(TestCase):
     def setUp(self):
         options=dict(query="SELECT * FROM menu",
                      dsn="sqlite://")
-        self.source=SQLSourceSection(None, None, options, [])
+        self.source=SQLSourceSection(MockTransmogrifier(), None, options, [])
         LoadSampleData(self.source.connection)
 
 

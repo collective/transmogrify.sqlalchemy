@@ -14,9 +14,21 @@ class SQLSourceSection(object):
 
         self.logger=logging.getLogger(name)
         self.query=options["query"]
-        self.engine=sqlalchemy.create_engine(options["dsn"])
-        self.connection=self.engine.connect()
-
+        
+        # Allow for connection reuse along a pipeline
+        self.dsn = options["dsn"]
+        if hasattr(transmogrifier, '__sqlsource_connections'):
+            self.conns = transmogrifier.__sqlsource_connections
+        else:
+            transmogrifier.__sqlsource_connection = self.conns = {}
+            
+        if self.dsn in self.conns:
+            self.connection = conns[self.dsn]
+            self.close = True
+        else:
+            engine = sqlalchemy.create_engine(self.dsn)
+            self.conns[self.dsn] = self.connection = engine.connect()
+            self.close = False
 
     def __iter__(self):
         for item in self.previous:
@@ -35,6 +47,8 @@ class SQLSourceSection(object):
             trans.rollback()
             raise
 
-        self.connection.close()
+        if self.close:
+            self.connection.close()
+            del self.conns[self.dsn]
 
 
