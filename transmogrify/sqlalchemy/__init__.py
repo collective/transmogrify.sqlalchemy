@@ -20,7 +20,7 @@ class SQLSourceSection(object):
         if hasattr(transmogrifier, '_sqlsource_connections'):
             conns = transmogrifier._sqlsource_connections
         else:
-            transmogrifier._sqlsource_connection = conns = {}
+            transmogrifier._sqlsource_connections = conns = {}
             
         if dsn in conns:
             self.connection = conns[dsn]
