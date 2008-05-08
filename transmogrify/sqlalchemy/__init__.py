@@ -17,10 +17,10 @@ class SQLSourceSection(object):
         
         # Allow for connection reuse along a pipeline
         dsn = options["dsn"]
-        if hasattr(transmogrifier, '__sqlsource_connections'):
-            conns = transmogrifier.__sqlsource_connections
+        if hasattr(transmogrifier, '_sqlsource_connections'):
+            conns = transmogrifier._sqlsource_connections
         else:
-            transmogrifier.__sqlsource_connection = conns = {}
+            transmogrifier._sqlsource_connection = conns = {}
             
         if dsn in conns:
             self.connection = conns[dsn]
