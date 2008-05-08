@@ -16,19 +16,17 @@ class SQLSourceSection(object):
         self.query=options["query"]
         
         # Allow for connection reuse along a pipeline
-        self.dsn = options["dsn"]
+        dsn = options["dsn"]
         if hasattr(transmogrifier, '__sqlsource_connections'):
-            self.conns = transmogrifier.__sqlsource_connections
+            conns = transmogrifier.__sqlsource_connections
         else:
-            transmogrifier.__sqlsource_connection = self.conns = {}
+            transmogrifier.__sqlsource_connection = conns = {}
             
-        if self.dsn in self.conns:
-            self.connection = conns[self.dsn]
-            self.close = False
+        if dsn in conns:
+            self.connection = conns[dsn]
         else:
-            engine = sqlalchemy.create_engine(self.dsn)
-            self.conns[self.dsn] = self.connection = engine.connect()
-            self.close = True
+            engine = sqlalchemy.create_engine(dsn)
+            conns[dsn] = self.connection = engine.connect()
 
     def __iter__(self):
         for item in self.previous:
@@ -46,9 +44,4 @@ class SQLSourceSection(object):
         except:
             trans.rollback()
             raise
-
-        if self.close:
-            self.connection.close()
-            del self.conns[self.dsn]
-
 
