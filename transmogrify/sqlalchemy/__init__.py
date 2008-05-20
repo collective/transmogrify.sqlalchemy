@@ -10,13 +10,15 @@ class SQLSourceSection(object):
     implements(ISection)
 
     def __init__(self, transmogrifier, name, options, previous):
-        self.previous=previous
-
-        self.logger=logging.getLogger(name)
-        self.query=options["query"]
+        self.previous = previous
+        self.logger = logging.getLogger(options['blueprint'])
+        
+        keys = options.keys()
+        keys.sort()
+        self.queries = [options[k] for k in keys if k.startswith('query')]
         
         # Allow for connection reuse along a pipeline
-        dsn = options["dsn"]
+        dsn = options['dsn']
         if hasattr(transmogrifier, '_sqlsource_connections'):
             conns = transmogrifier._sqlsource_connections
         else:
@@ -34,9 +36,10 @@ class SQLSourceSection(object):
             
         trans=self.connection.begin()
         try:
-            result=self.connection.execute(self.query)
-            for row in result:
-                yield dict(row.items())
+            for query in self.queries:
+                result=self.connection.execute(query)
+                for row in result:
+                    yield dict(row.items())
             trans.commit()
         except OperationalError, e:
             trans.rollback()

@@ -10,8 +10,10 @@ class MockTransmogrifier(object):
 
 class SQLSourceSectionTests(TestCase):
     def setUp(self):
-        options=dict(query="SELECT * FROM menu",
-                     dsn="sqlite://")
+        options=dict(query1="SELECT * FROM menu",
+                     query2="SELECT * FROM menu WHERE id=1",
+                     dsn="sqlite://",
+                     blueprint='blueprintname')
         self.source=SQLSourceSection(MockTransmogrifier(), None, options, [])
         LoadSampleData(self.source.connection)
 
@@ -29,18 +31,19 @@ class SQLSourceSectionTests(TestCase):
         self.assertEqual(data,
                 [{u"price": 25, u"id": 1, u"title": u"Cream Spinach Soup"},
                  {u"price": 37, u"id": 2, u"title": u"Shrimp Toast"},
-                 {u"price": 34, u"id": 3, u"title": u"Mini eggrolls"}])
+                 {u"price": 34, u"id": 3, u"title": u"Mini eggrolls"},
+                 {u"price": 25, u"id": 1, u"title": u"Cream Spinach Soup"}])
 
     def testUnknownTableReturnsEmptyList(self):
         # No SQLAlchemy internal errors should be exposed
-        self.source.query="SELECT * FROM nothere"
+        self.source.queries=["SELECT * FROM nothere"]
         data=[row for row in self.source]
         self.assertEqual(data, [])
 
 
     def testSQLSyntaxErrorReturnsEmptyList(self):
         # No SQLAlchemy internal errors should be exposed
-        self.source.query="INVALID COMMAND "
+        self.source.queries=["INVALID COMMAND"]
         data=[row for row in self.source]
         self.assertEqual(data, [])
 
