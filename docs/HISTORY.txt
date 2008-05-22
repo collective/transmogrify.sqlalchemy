@@ -1,7 +1,10 @@
 Changelog
 =========
 
-1.0 - Unreleased
+1.0.1 - Unreleased
+------------------
+
+1.0 - 2008-05-22
 ----------------
 
 * Initial release
