@@ -4,6 +4,9 @@ Changelog
 1.0.1 - Unreleased
 ------------------
 
+* The keys in the returned dictionary need to be normal strings.
+  [fschulze]
+
 1.0 - 2008-05-22
 ----------------
 
