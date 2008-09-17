@@ -35,4 +35,3 @@ def LoadSampleData(connection):
     connection.execute("INSERT INTO menu VALUES (1, 'Cream Spinach Soup', 25)")
     connection.execute("INSERT INTO menu VALUES (2, 'Shrimp Toast', 37)")
     connection.execute("INSERT INTO menu VALUES (3, 'Mini eggrolls', 34)")
-

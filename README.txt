@@ -7,7 +7,7 @@ This package implements a simple SQLAlchemy blueprint for
 If you are not familiar with transmogrifier please read its documentation
 first to get a basic understanding of how you can use this package.
 
-This package implements the ''transmogrify.sqlalchemy'' blueprint which
+This package implements the `transmogrify.sqlalchemy` blueprint which
 executes a SQL statement, generally a query, and feeds the return values
 from that query into the transmogrifier pipeline.
 

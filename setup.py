@@ -24,10 +24,7 @@ setup(name='transmogrify.sqlalchemy',
       install_requires=[
           'setuptools',
           "collective.transmogrifier",
-          "SQLAlchemy >=0.4,<0.5dev",
-#         "zope.interface",
+          "SQLAlchemy >=0.4",
       ],
       test_suite='nose.collector',
-      entry_points="""
-      """,
       )

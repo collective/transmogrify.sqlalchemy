@@ -5,8 +5,10 @@ from unittest import makeSuite
 from transmogrify.sqlalchemy import SQLSourceSection
 from transmogrify.sqlalchemy.tests.utils import LoadSampleData
 
+
 class MockTransmogrifier(object):
     pass
+
 
 class SQLSourceSectionTests(TestCase):
     def setUp(self):
@@ -25,7 +27,6 @@ class SQLSourceSectionTests(TestCase):
         data=[row for row in self.source]
         self.failUnless(isinstance(data[0], dict))
 
-
     def testReturnedData(self):
         data=[row for row in self.source]
         self.assertEqual(data,
@@ -40,7 +41,6 @@ class SQLSourceSectionTests(TestCase):
         data=[row for row in self.source]
         self.assertEqual(data, [])
 
-
     def testSQLSyntaxErrorReturnsEmptyList(self):
         # No SQLAlchemy internal errors should be exposed
         self.source.queries=["INVALID COMMAND"]
@@ -48,9 +48,7 @@ class SQLSourceSectionTests(TestCase):
         self.assertEqual(data, [])
 
 
-
 def test_suite():
     suite=TestSuite()
     suite.addTest(makeSuite(SQLSourceSectionTests))
     return suite
-
