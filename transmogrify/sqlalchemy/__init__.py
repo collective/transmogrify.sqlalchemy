@@ -2,9 +2,11 @@ import logging
 import sqlalchemy
 from sqlalchemy.exceptions import OperationalError
 from zope.interface import classProvides, implements
+from zope.annotation import IAnnotations
 from collective.transmogrifier.interfaces import ISectionBlueprint
 from collective.transmogrifier.interfaces import ISection
 
+SQLSOURCE_KEY = 'transmogrify.sqlalchemy.sqlsourcesection'
 
 class SQLSourceSection(object):
     classProvides(ISectionBlueprint)
@@ -20,10 +22,7 @@ class SQLSourceSection(object):
         
         # Allow for connection reuse along a pipeline
         dsn = options['dsn']
-        if hasattr(transmogrifier, '_sqlsource_connections'):
-            conns = transmogrifier._sqlsource_connections
-        else:
-            transmogrifier._sqlsource_connections = conns = {}
+        conns = IAnnotations(transmogrifier).setdefault(SQLSOURCE_KEY, {})
             
         if dsn in conns:
             self.connection = conns[dsn]
