@@ -1,6 +1,10 @@
 import logging
 import sqlalchemy
-from sqlalchemy.exceptions import OperationalError
+try:
+    # deprecated in sqlalchemy 0.7 and removed in 0.7.3
+    from sqlalchemy.exceptions import OperationalError
+except ImportError:
+    from sqlalchemy.exc import OperationalError
 from zope.interface import classProvides, implements
 from zope.annotation import IAnnotations
 from collective.transmogrifier.interfaces import ISectionBlueprint
