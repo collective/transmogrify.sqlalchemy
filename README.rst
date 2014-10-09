@@ -11,6 +11,7 @@ This package implements the `transmogrify.sqlalchemy` blueprint which
 executes a SQL statement, generally a query, and feeds the return values
 from that query into the transmogrifier pipeline.
 
+
 Configuration
 =============
 
@@ -19,10 +20,11 @@ A transmogrify.sqlalchemy blueprint takes two or more parameters:
 dsn
    Connection information for the SQL database. The exact format is documented
    in the SQLAlchemy documentation for `create_engine() arguments`_.
-  
+
 query*
    The SQL queries that will be executed. Any parameter starting with 'query'
    will be executed, in sorted order.
+
 
 Example
 =======
@@ -38,5 +40,3 @@ database into the pipeline::
 
 .. _create_engine() arguments: http://www.sqlalchemy.org/docs/04/dbengine.html#dbengine_establishing
 .. _collective.transmogrifier: https://pypi.python.org/pypi/collective.transmogrifier
-
-
