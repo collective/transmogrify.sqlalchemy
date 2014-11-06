@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.0.2 (Unreleased)
+1.0.2 (2014-11-06)
 ------------------
 
 - Use IAnnotations to store info on the transmogrifier context, instead
