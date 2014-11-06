@@ -4,7 +4,7 @@ from setuptools import (
 )
 
 
-version = '1.0.2'
+version = '1.0.3.dev0'
 desc = 'Feed data from SQLAlchemy into a transmogrifier pipeline'
 long_desc = open('README.rst').read() + '\n\n' + open('HISTORY.rst').read()
 
