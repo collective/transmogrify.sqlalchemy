@@ -4,8 +4,13 @@ Changelog
 1.0.2 (Unreleased)
 ------------------
 
+- Use IAnnotations to store info on the transmogrifier context, instead
+  of supersekrit attributes.
+  [mj]
+
 - Added workaround for sqlalchemy versions > 0.7.2 where sqlalchemy.exceptions
   is gone in favour of sqlalchemy.exc.
+  [pilz]
 
 
 1.0.1 (2008-09-17)
