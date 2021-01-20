@@ -11,6 +11,9 @@ from zope.annotation import IAnnotations
 from collective.transmogrifier.interfaces import ISectionBlueprint
 from collective.transmogrifier.interfaces import ISection
 
+import pymysql
+pymysql.install_as_MySQLdb()
+
 SQLSOURCE_KEY = 'transmogrify.sqlalchemy.sqlsourcesection'
 
 
