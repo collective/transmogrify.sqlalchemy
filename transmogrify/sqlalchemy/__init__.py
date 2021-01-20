@@ -5,16 +5,18 @@ try:
     from sqlalchemy.exceptions import OperationalError
 except ImportError:
     from sqlalchemy.exc import OperationalError
-from zope.interface import classProvides, implements
+from zope.interface import provider
+from zope.interface import implementer
 from zope.annotation import IAnnotations
 from collective.transmogrifier.interfaces import ISectionBlueprint
 from collective.transmogrifier.interfaces import ISection
 
 SQLSOURCE_KEY = 'transmogrify.sqlalchemy.sqlsourcesection'
 
+
+@provider(ISectionBlueprint)
+@implementer(ISection)
 class SQLSourceSection(object):
-    classProvides(ISectionBlueprint)
-    implements(ISection)
 
     def __init__(self, transmogrifier, name, options, previous):
         self.previous = previous
