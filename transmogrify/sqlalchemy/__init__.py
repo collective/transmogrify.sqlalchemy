@@ -20,7 +20,7 @@ class SQLSourceSection(object):
         self.previous = previous
         self.logger = logging.getLogger(options['blueprint'])
         
-        keys = options.keys()
+        keys = list(options.keys())
         keys.sort()
         self.queries = [options[k] for k in keys if k.startswith('query')]
         
@@ -45,7 +45,7 @@ class SQLSourceSection(object):
                 for row in result:
                     yield dict((x[0].encode('utf-8'), x[1]) for x in row.items())
             trans.commit()
-        except OperationalError, e:
+        except OperationalError as e:
             trans.rollback()
             self.logger.warn("SQL operational error: %s" % e)
         except:
