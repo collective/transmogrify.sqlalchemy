@@ -48,7 +48,8 @@ class SQLSourceSection(object):
             for query in self.queries:
                 result=self.connection.execute(query)
                 for row in result:
-                    yield dict((x[0].encode('utf-8'), x[1]) for x in row.items())
+                    # yield dict((x[0].encode('utf-8'), x[1]) for x in row.items())
+                    yield dict((x[0], x[1]) for x in row.items())
             trans.commit()
         except OperationalError as e:
             trans.rollback()
