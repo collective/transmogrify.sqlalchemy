@@ -50,6 +50,7 @@ class SQLSourceSection(object):
                 for row in result:
                     # yield dict((x[0].encode('utf-8'), x[1]) for x in row.items())
                     yield dict((x[0], x[1]) for x in row.items())
+                self.logger.info("Found {} rows for '{}'.".format(result.rowcount, query))
             trans.commit()
         except OperationalError as e:
             trans.rollback()
