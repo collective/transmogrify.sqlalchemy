@@ -1,5 +1,6 @@
 import copy
-from zope.interface import classProvides, implements
+from zope.interface import provider
+from zope.interface import implementer
 from collective.transmogrifier.interfaces import ISectionBlueprint
 from collective.transmogrifier.interfaces import ISection
 
@@ -12,9 +13,9 @@ def getStore():
     return _store
 
 
+@provider(ISectionBlueprint)
+@implementer(ISection)
 class MemoryStore(object):
-    classProvides(ISectionBlueprint)
-    implements(ISection)
 
     def __init__(self, transmogrifier, name, options, previous):
         self.previous = previous
